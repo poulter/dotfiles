@@ -1,0 +1,14 @@
+. /etc/bash_completion
+
+export PATH=.:~/bin:${PATH}
+
+# default settings
+export EDITOR=vim
+
+killit () { ps      | grep $* | perl -lane 'print $F[0]' | xargs kill; }
+Killit () { ps -aux | grep $* | perl -lane 'print $F[1]' | xargs kill; }
+
+# To install rvm: bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
+
+# eval `ssh-agent`
