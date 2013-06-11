@@ -6,7 +6,7 @@ set                     pastetoggle=<F2>
 map               <F3> :set list! nolist?<CR>
 map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
-map               <F5> /\<differ\><CR>
+map               <F5> /\*E\\|\<UVM_FATAL *:\\|\<UVM_ERROR *:\\|^ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed<CR>
 nnoremap <silent> <F7> :Tlist<CR>
 
 map               <F10> :!dssc co -get %<CR>
@@ -90,7 +90,17 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+function! Ieslog()
+  " change , to : for errors
+  g/,\(\d\+\)|/s//:\1|
+  g/,\(\d\+\)): /s//:\1):
+  g/file: \S\+\zs, line = \(\d\+\)\ze/s//:\1
+  " return to previous line
+  if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
+endfunction
+
 augroup filetype
+  au! BufRead,BufNewFile cmd.log                           silent! call Ieslog()
   au! BufRead,BufNewFile *.vri,*.vrh,*.vr                       set filetype=vera
   "au! BufRead,BufNewFile *.v,*.sv,*.vbh,*.stm,*.vbh.aml,*.v_tpl set filetype=systemverilog
   "au! BufRead,BufNewFile *.v,*.sv,*.vbh,*.stm,*.vbh.aml,*.v_tpl set filetype=verilog_systemverilog
@@ -113,7 +123,7 @@ autocmd BufNewFile  *.C         0r ~/.vim/skeleton/skeleton.C
 autocmd BufNewFile  *.rb        0r ~/.vim/skeleton/skeleton.rb
 
 " tags
-set tags=./tags;/,~/docs
+set tags=./tags;/,~/docs/tags
 "let Tlist_Ctags_Cmd = '~/bin/ctags'
 "let Tlist_Sort_Type = "name"
 "let Tlist_Exit_OnlyWindow = 1
