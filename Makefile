@@ -1,4 +1,4 @@
-IGNORE:= . .. .git Makefile %.swp
+IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules
 
 DIR:=$(notdir $(shell pwd))
 
