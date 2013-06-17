@@ -8,8 +8,8 @@ map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
 map               <F5> /\*E\\|\<UVM_FATAL *:\\|\<UVM_ERROR *:\\|^ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed<CR>
 nnoremap <silent> <F7> :Tlist<CR>
-
-map               <F10> :!dssc co -get %<CR>
+map               <F9> :call Dropmarker()<CR>
+map               <F10> :call Fixdroppedmarkers()<CR>
 map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
@@ -172,3 +172,10 @@ set ul=1000
 " These are files we are not likely to want to edit or read.
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
 
+function! Dropmarker()
+  call append('.',"$display(\"%0d: DEBUG MARKER " . expand('%:t') . ':' . (line('.')+1) . '", $time);')
+  exe line('.') + 2
+endfunction
+function! Fixdroppedmarkers()
+  %s/DEBUG MARKER .*:\zs\(\d\+\)\ze/\=line('.')
+endfunction
