@@ -110,3 +110,6 @@
 	path = .vim/bundles/vim-SystemVerilog
 	url = https://github.com/poulter/vim-SystemVerilog.git
 	ignore = dirty
+[submodule ".vim/bundles/LargeFile"]
+	path = .vim/bundles/LargeFile
+	url = https://github.com/vim-scripts/LargeFile
