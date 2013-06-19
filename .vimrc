@@ -51,6 +51,12 @@ map!  <backspace>
 set backspace=2      " allow backspacing over everything in insert mode
  
 " look and feel
+
+set background=dark
+" let g:solarized_termcolors=256 " use degraded 256 bit colors
+" let g:solarized_termtrans = 1
+" colorscheme solarized
+" togglebg#map("<F5>") 
 colorscheme tommy  " use color scheme for dark backgrounds
 " colorscheme vividchalk
 

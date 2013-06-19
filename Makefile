@@ -1,4 +1,4 @@
-IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules
+IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules poulter.zsh-theme
 
 DIR:=$(notdir $(shell pwd))
 
@@ -43,6 +43,16 @@ $(SUBMODULES):.gitmodules-changed
 	git submodule update
 .INTERMEDIATE: .gitmodules-changed
 ###################################
+
+###############################
+######## miscellaneous ########
+###############################
+# poulter theme copied to oh-my-zsh
+all: poulter.zsh-theme
+poulter.zsh-theme: $(SUBMODULES)
+	cd .oh-my-zsh/themes/; \
+	  ln -s ../../$@ .
+###############################
 
 ##########################
 ######## settings ########
