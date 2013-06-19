@@ -170,7 +170,7 @@ set ul=1000
 
 " Suffixes that get lower priority when doing tab completion for filenames.
 " These are files we are not likely to want to edit or read.
-set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+set suffixes=.bak,~,.swp,.o,.info,.aux,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.toc
 
 function! Dropmarker()
   call append('.',"$display(\"%0d: DEBUG MARKER " . expand('%:t') . ':' . (line('.')+1) . '", $time);')
