@@ -49,9 +49,9 @@ $(SUBMODULES):.gitmodules-changed
 ###############################
 # poulter theme copied to oh-my-zsh
 all: poulter.zsh-theme
-poulter.zsh-theme: $(SUBMODULES)
+.oh-my-zsh/themes/poulter.zsh-theme: $(SUBMODULES)
 	cd .oh-my-zsh/themes/; \
-	  ln -s ../../$@ .
+	  ln -s ../../$(notdir $@) .
 ###############################
 
 ##########################
