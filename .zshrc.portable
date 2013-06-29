@@ -65,3 +65,7 @@ bindkey '^N' history-search-forward
 # cd using just the directory name
 setopt AUTO_CD
 
+# each shell gets its own history
+unsetopt inc_append_history
+unsetopt share_history
+setopt append_history
