@@ -48,10 +48,16 @@ $(SUBMODULES):.gitmodules-changed
 ######## miscellaneous ########
 ###############################
 # poulter theme copied to oh-my-zsh
-all: poulter.zsh-theme
+all: poulter.zsh-theme .vim/plugin/autotag.vim
+
 .oh-my-zsh/themes/poulter.zsh-theme: $(SUBMODULES)
 	cd .oh-my-zsh/themes/; \
 	  ln -s ../../$(notdir $@) .
+
+.vim/plugin/autotag.vim: Makefile
+	wget https://raw.github.com/craigemery/dotFiles/master/vim/plugin/autotag.vim
+	mv autotag.vim .vim/plugin/autotag.vim 
+
 ###############################
 
 ##########################
