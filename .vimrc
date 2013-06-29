@@ -8,8 +8,9 @@ map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
 map               <F5> /\*E\\|\<UVM_FATAL *:\\|\<UVM_ERROR *:\\|^ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed<CR>
 nnoremap <silent> <F7> :Tlist<CR>
-map               <F9> :call Dropmarker()<CR>
-map               <F10> :call Fixdroppedmarkers()<CR>
+map    <silent>   <F9> :call Dropmarker()<CR>
+map    <silent> <C-F9> :call Fixdroppedmarkers()<CR>
+map    <silent> <S-F9> :call Removedroppedmarkers()<CR>
 map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
@@ -184,4 +185,7 @@ function! Dropmarker()
 endfunction
 function! Fixdroppedmarkers()
   %s/DEBUG MARKER .*:\zs\(\d\+\)\ze/\=line('.')
+endfunction
+function! Removedroppedmarkers()
+  %!grep -v '0d: DEBUG MARKER'
 endfunction
