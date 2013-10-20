@@ -48,7 +48,7 @@ $(SUBMODULES):.gitmodules-changed
 ######## miscellaneous ########
 ###############################
 # poulter theme copied to oh-my-zsh
-all: poulter.zsh-theme .vim/plugin/autotag.vim
+all: .oh-my-zsh/themes/poulter.zsh-theme .vim/plugin/autotag.vim
 
 .oh-my-zsh/themes/poulter.zsh-theme: $(SUBMODULES)
 	cd .oh-my-zsh/themes/; \
