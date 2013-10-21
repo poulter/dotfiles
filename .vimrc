@@ -9,8 +9,8 @@ map               <F4> :call NumberToggle()<CR>
 map               <F5> /\*E\\|\<UVM_FATAL *:\\|\<UVM_ERROR *:\\|^ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed<CR>
 nnoremap <silent> <F7> :Tlist<CR>
 map    <silent>   <F9> :call Dropmarker()<CR>
-map    <silent> <C-F9> :call Fixdroppedmarkers()<CR>
-map    <silent> <S-F9> :call Removedroppedmarkers()<CR>
+map    <silent> <S-F9> :call Fixdroppedmarkers()<CR>
+map    <silent> <A-F9> :call Removedroppedmarkers()<CR>
 map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
@@ -109,12 +109,15 @@ endfunction
 augroup filetype
   au! BufRead,BufNewFile cmd.log                           silent! call Ieslog()
   au! BufRead,BufNewFile *.vri,*.vrh,*.vr                       set filetype=vera
+  au! BufRead,BufNewFile sim.cfg                                set filetype=perl
   "au! BufRead,BufNewFile *.v,*.sv,*.vbh,*.stm,*.vbh.aml,*.v_tpl set filetype=systemverilog
   "au! BufRead,BufNewFile *.v,*.sv,*.vbh,*.stm,*.vbh.aml,*.v_tpl set filetype=verilog_systemverilog
   au! BufRead,BufNewFile *.god,*.pill,Gemfile,*.simeta          set filetype=ruby
   au! BufRead,BufNewFile                      *.simeta.erb      let b:eruby_subtype='ruby'|set filetype=eruby
   au! BufRead,BufNewFile *.yaml                                 let b:eruby_subtype='yaml'|set filetype=eruby
 augroup END
+
+:au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\" ' "
 
 " skeletons
 autocmd BufNewFile  Makefile*   0r ~/.vim/skeleton/skeleton.mk
@@ -184,7 +187,7 @@ function! Dropmarker()
   exe line('.') + 2
 endfunction
 function! Fixdroppedmarkers()
-  %s/DEBUG MARKER .*:\zs\(\d\+\)\ze/\=line('.')
+  %s/DEBUG MARKER [^:]\+:\zs\(\d\+\)\ze/\=line('.')
 endfunction
 function! Removedroppedmarkers()
   %!grep -v '0d: DEBUG MARKER'
