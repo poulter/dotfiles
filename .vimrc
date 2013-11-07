@@ -117,7 +117,7 @@ augroup filetype
   au! BufRead,BufNewFile *.yaml                                 let b:eruby_subtype='yaml'|set filetype=eruby
 augroup END
 
-:au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\" ' "
+:au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\""
 
 " skeletons
 autocmd BufNewFile  Makefile*   0r ~/.vim/skeleton/skeleton.mk
