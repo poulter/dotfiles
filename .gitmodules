@@ -120,3 +120,6 @@
 [submodule ".vim/bundles/rainbow_parentheses"]
 	path = .vim/bundles/rainbow_parentheses
 	url = https://github.com/kien/rainbow_parentheses.vim
+[submodule ".vim/bundles/vcsp4/plugin"]
+	path = .vim/bundles/vcsp4/plugin
+	url = https://github.com/jdthomas/vcsp4
