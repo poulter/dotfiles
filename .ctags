@@ -39,3 +39,4 @@
 --regex-altsystemverilog=/^[ \t]*(extern)?[ \t]*(virtual)?[ \t]*(protected)?[ \t]*function[ \t]*.*[ \t]+([a-zA-Z_0-9]+)[ \t]*[(;]/\4/f,function/ 
 --regex-altsystemverilog=/^[ \t]*(virtual)?[ \t]*task[ \t]*.*[ \t]+([a-zA-Z_0-9]+)[\t]*[(;]/\2/t,task/ 
 --regex-altsystemverilog=/^[ \t]*(virtual)?[ \t]*function[ \t]*.*[ \t]+([a-zA-Z_0-9]+)[ \t]*[(;]/\2/f,function/ 
+--altsystemverilog-kinds=+ctf 

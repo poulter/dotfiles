@@ -11,6 +11,7 @@ nnoremap <silent> <F7> :Tlist<CR>
 map    <silent>   <F9> :call Dropmarker()<CR>
 map    <silent> <S-F9> :call Fixdroppedmarkers()<CR>
 map    <silent> <A-F9> :call Removedroppedmarkers()<CR>
+map    <silent> <C-F9> :call Removedroppedmarkers()<CR>
 map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
@@ -97,6 +98,13 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
+" rainbow parenthesis
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+au BufRead,BufNewFile *.log RainbowParenthesesToggle
+
 function! Ieslog()
   " change , to : for errors
   g/,\(\d\+\)|/s//:\1|
@@ -115,6 +123,7 @@ augroup filetype
   au! BufRead,BufNewFile *.god,*.pill,Gemfile,*.simeta          set filetype=ruby
   au! BufRead,BufNewFile                      *.simeta.erb      let b:eruby_subtype='ruby'|set filetype=eruby
   au! BufRead,BufNewFile *.yaml                                 let b:eruby_subtype='yaml'|set filetype=eruby
+  au! BufRead,BufNewFile *.sv.erb                               let b:eruby_subtype='systemverilog'  |set filetype=eruby
 augroup END
 
 :au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\""
