@@ -6,12 +6,14 @@ set                     pastetoggle=<F2>
 map               <F3> :set list! nolist?<CR>
 map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
-map               <F5> /\*E\\|\<UVM_FATAL *:\\|\<UVM_ERROR *:\\|^ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed<CR>
+map               <F5> /\*E\\|^UVM_FATAL\\|^UVM_ERROR\\|: ERROR \\|ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed\\|^ *\d*:* *FAIL<CR>
 nnoremap <silent> <F7> :Tlist<CR>
-map    <silent>   <F9> :call Dropmarker()<CR>
-map    <silent> <S-F9> :call Fixdroppedmarkers()<CR>
-map    <silent> <A-F9> :call Removedroppedmarkers()<CR>
-map    <silent> <C-F9> :call Removedroppedmarkers()<CR>
+map  <silent>     <F9> :call Dropmarker()<CR>
+map  <silent>   <S-F9> :call Fixdroppedmarkers()<CR>
+map  <silent>   <A-F9> :call Removedroppedmarkers()<CR>
+map  <silent>   <C-F9> :call Removedroppedmarkers()<CR>
+map  <silent> <S-A-F9> :call Removedroppedmarkers()<CR>
+map  <silent> <S-C-F9> :call Removedroppedmarkers()<CR>
 map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
@@ -27,7 +29,7 @@ if exists('g:loaded_pathogen')
   call pathogen#helptags()
 end
 
-set relativenumber
+" set relativenumber
 function! NumberToggle()
   if (&relativenumber == 1)
     set norelativenumber
@@ -114,6 +116,8 @@ function! Ieslog()
   if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g'\"" | endif
 endfunction
 
+:let g:syntastic_ruby_checkers = ["mri","rubocop"]
+
 augroup filetype
   au! BufRead,BufNewFile cmd.log                           silent! call Ieslog()
   au! BufRead,BufNewFile *.vri,*.vrh,*.vr                       set filetype=vera
@@ -124,6 +128,8 @@ augroup filetype
   au! BufRead,BufNewFile                      *.simeta.erb      let b:eruby_subtype='ruby'|set filetype=eruby
   au! BufRead,BufNewFile *.yaml                                 let b:eruby_subtype='yaml'|set filetype=eruby
   au! BufRead,BufNewFile *.sv.erb                               let b:eruby_subtype='systemverilog'  |set filetype=eruby
+  "au BufRead,BufNewFile *.sv                                    set filetype=systemverilog.doxygen
+  au BufNewFile,BufRead *.doxygen                               setfiletype doxygen
 augroup END
 
 :au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\""
@@ -142,7 +148,7 @@ autocmd BufNewFile  *.C         0r ~/.vim/skeleton/skeleton.C
 autocmd BufNewFile  *.rb        0r ~/.vim/skeleton/skeleton.rb
 
 " tags
-set tags=./tags;/,~/docs/tags
+set tags=./tags;/,~/docs/tags,$WORK/tags
 "let Tlist_Ctags_Cmd = '~/bin/ctags'
 "let Tlist_Sort_Type = "name"
 "let Tlist_Exit_OnlyWindow = 1
@@ -201,3 +207,4 @@ endfunction
 function! Removedroppedmarkers()
   %!grep -v '0d: DEBUG MARKER'
 endfunction
+let g:load_doxygen_syntax=1
