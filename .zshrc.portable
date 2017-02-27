@@ -56,7 +56,6 @@ export PATH=.:$PATH:$HOME/bin # my directory
 # /usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/home/poulter/.rvm/bin:/home/poulter/cadence/installs/INCISIV122/bin/"/usr/lib/lightdm/lightdm:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 
 export EDITOR="vim"
-bindkey -v 
 
 # vi style incremental search
 bindkey '^R' history-incremental-search-backward
@@ -71,3 +70,8 @@ setopt AUTO_CD
 unsetopt inc_append_history
 unsetopt share_history
 setopt append_history
+
+# source_sh () {
+#   emulate -LR sh
+#   . "$@"
+# }
