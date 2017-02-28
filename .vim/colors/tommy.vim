@@ -1,18 +1,16 @@
 " Vim color file
-" Maintainer:	David Schweikert <dws@ee.ethz.ch>
-" Last Change:	2001 Mai 14
+" Maintainer:	Tommy Poulter
+" Last Change:	2017 Feb 27
 
-let colors_name = "tommy"
-
-"hi Comment term=NONE cterm=NONE guifg=Grey ctermfg=Grey
-"hi Comment term=NONE cterm=NONE guifg=LightBlue ctermfg=LightBlue
-hi Comment term=NONE cterm=NONE guifg=LightCyan ctermfg=LightCyan
-" hi Comment    term=NONE      cterm=NONE ctermfg=darkred      gui=NONE guifg=red2
-
+set background=dark
+hi clear
 if exists("syntax_on")
-  let syntax_cmd = "enable"
-  runtime syntax/syncolor.vim
-  unlet syntax_cmd
+  syntax reset
 endif
+"colorscheme default
+let g:colors_name = "tommy"
 
-" vim: sw=2
+highlight Normal   guifg=White     ctermfg=White     guibg=Black ctermbg=Black 
+highlight Comment  guifg=LightCyan ctermfg=LightCyan                            
+
+
