@@ -10,7 +10,7 @@ endif
 "colorscheme default
 let g:colors_name = "tommy"
 
-highlight Normal   guifg=White     ctermfg=White     guibg=Black ctermbg=Black 
+highlight Normal   guifg=White                       guibg=Black
 highlight Comment  guifg=LightCyan ctermfg=LightCyan                            
 
 
