@@ -1,23 +1,18 @@
 [submodule ".vim/bundles/vim-snipmate"]
 	path = .vim/bundles/vim-snipmate
 	url = https://github.com/garbas/vim-snipmate
-	ignore = dirty
 [submodule ".vim/bundles/vim-addon-mw-utils"]
 	path = .vim/bundles/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-	ignore = dirty
 [submodule ".vim/bundles/tlib_vim"]
 	path = .vim/bundles/tlib_vim
 	url = https://github.com/tomtom/tlib_vim.git
-	ignore = dirty
 [submodule ".vim/bundles/supertab"]
 	path = .vim/bundles/supertab
 	url = https://github.com/ervandew/supertab.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-easymotion"]
 	path = .vim/bundles/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
-	ignore = dirty
 [submodule ".vim/bundles/YankRing"]
 	path = .vim/bundles/YankRing
 	url = https://github.com/vim-scripts/YankRing.vim.git
@@ -25,11 +20,9 @@
 [submodule ".vim/bundles/vim-pathogen"]
 	path = .vim/bundles/vim-pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-	ignore = dirty
 [submodule ".vim/bundles/closetag"]
 	path = .vim/bundles/closetag
 	url = https://github.com/vim-scripts/closetag.vim.git
-	ignore = dirty
 [submodule ".vim/bundles/vcscommand"]
 	path = .vim/bundles/vcscommand
 	url = https://github.com/vim-scripts/vcscommand.vim.git
@@ -49,43 +42,33 @@
 [submodule ".vim/bundles/ctrlp"]
 	path = .vim/bundles/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-rooter"]
 	path = .vim/bundles/vim-rooter
 	url = https://github.com/airblade/vim-rooter.git
-	ignore = dirty
 [submodule ".vim/bundles/AutoTag"]
 	path = .vim/bundles/AutoTag
 	url = https://github.com/vim-scripts/AutoTag.git
-	ignore = dirty
 [submodule ".vim/bundles/tagbar"]
 	path = .vim/bundles/tagbar
 	url = https://github.com/majutsushi/tagbar.git
-	ignore = dirty
 [submodule ".vim/bundles/nerdtree"]
 	path = .vim/bundles/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-abolish"]
 	path = .vim/bundles/vim-abolish
 	url = https://github.com/tpope/vim-abolish.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-endwise"]
 	path = .vim/bundles/vim-endwise
 	url = https://github.com/tpope/vim-endwise.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-rails"]
 	path = .vim/bundles/vim-rails
 	url = https://github.com/tpope/vim-rails.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-bundler"]
 	path = .vim/bundles/vim-bundler
 	url = https://github.com/tpope/vim-bundler.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-repeat"]
 	path = .vim/bundles/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-visual-increment"]
 	path = .vim/bundles/vim-visual-increment
 	url = https://github.com/triglav/vim-visual-increment.git
@@ -93,11 +76,9 @@
 [submodule ".vim/bundles/nerdcommenter"]
 	path = .vim/bundles/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-surround"]
 	path = .vim/bundles/vim-surround
 	url = https://github.com/tpope/vim-surround.git
-	ignore = dirty
 [submodule ".vim/bundles/vim-matchit"]
 	path = .vim/bundles/vim-matchit
 	url = https://github.com/Spaceghost/vim-matchit.git
@@ -105,7 +86,6 @@
 [submodule ".vim/bundles/vim-SystemVerilog"]
 	path = .vim/bundles/vim-SystemVerilog
 	url = https://github.com/poulter/vim-SystemVerilog.git
-	ignore = dirty
 [submodule ".vim/bundles/LargeFile"]
 	path = .vim/bundles/LargeFile
 	url = https://github.com/vim-scripts/LargeFile
@@ -123,3 +103,6 @@
 [submodule ".vim/bundles/vcsp4/plugin"]
 	path = .vim/bundles/vcsp4/plugin
 	url = https://github.com/jdthomas/vcsp4
+[submodule "git/git-when-merged"]
+	path = git/git-when-merged
+	url = https://github.com/mhagger/git-when-merged
