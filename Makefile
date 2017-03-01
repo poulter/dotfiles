@@ -1,37 +1,41 @@
-IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules poulter.zsh-theme
+PWD:= $(shell pwd)
+UPDIR:=$(notdir $(PWD))
 
-DIR:=$(notdir $(shell pwd))
+# don't make links to these
+IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules .vim bin
 
-FILES :=$(wildcard * .*)
-LINKS :=$(filter-out $(IGNORE),$(FILES))
-LINKS :=$(addprefix ../,$(LINKS))
+# ./ is assumed.  what other directories should be processed?
+OTHER_DIRS:= .vim/bundles bin
 
-BFILES:=$(wildcard bin/*)
-BLINKS:=$(filter-out $(IGNORE),$(BFILES))
-BLINKS:=$(addprefix ../,$(BLINKS))
+DIRS  :=$(addsuffix /,$(OTHER_DIRS)) ./
+IGNORE:=$(addprefix %/,$(IGNORE))
+FILES :=$(wildcard $(addsuffix *,$(DIRS)) $(addsuffix .*,$(DIRS)))
+FILES :=$(filter-out $(IGNORE),$(FILES))
+FILES :=$(patsubst ./%,%,$(FILES))
+LINKS :=$(addprefix ../,$(FILES))
 
 SUBMODULES:=$(shell grep "path = " .gitmodules)
 SUBMODULES:=$(filter-out path =,$(SUBMODULES))
 SUBMODULES:=$(addsuffix /.git,$(SUBMODULES))
 
-default:
+default: ../bin
 	make -L all
 
-all: $(LINKS) $(BLINKS) $(SUBMODULES)
+all: $(SUBMODULES) $(LINKS) 
 
 ##############################
 ######## create links ########
 ##############################
-$(LINKS):%:${notdir $@}
-	cd ../; ln -s $(DIR)/${notdir $@} ${notdir $@} 
+$(LINKS):%:$(patsubst ../%,%,$@)
+	cd ../; ln -s $(PWD)/$(patsubst ../%,%,$@) $(patsubst ../%,%,$@) 
 ##############################
 
-##################################
-######## create bin links ########
-##################################
-$(BLINKS):%:${notdir $@}
-	cd ../bin; ln -s $(DIR)/bin/${notdir $@} ${notdir $@}
-##################################
+##############################
+######## create dirs #########
+##############################
+../bin:
+	mkdir -p ../bin
+##############################
 
 ###################################
 ######## update submodules ########
