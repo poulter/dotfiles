@@ -2,7 +2,7 @@ PWD:= $(shell pwd)
 UPDIR:=$(notdir $(PWD))
 
 # don't make links to these
-IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules .vim bin
+IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules poulter.zsh-theme bin git
 
 # ./ is assumed.  what other directories should be processed?
 OTHER_DIRS:= .vim/bundles bin
@@ -57,6 +57,10 @@ all: .oh-my-zsh/themes/poulter.zsh-theme .vim/plugin/autotag.vim
 .oh-my-zsh/themes/poulter.zsh-theme: $(SUBMODULES)
 	cd .oh-my-zsh/themes/; \
 	  ln -s ../../$(notdir $@) .
+
+../bin/git-when-merged: $(SUBMODULES) ../bin
+	cd ../bin; \
+	  ln -s $(PWD)/git/git-when-merged/bin/git-when-merged .
 
 .vim/plugin/autotag.vim: Makefile
 	wget https://raw.github.com/craigemery/dotFiles/master/vim/plugin/autotag.vim
