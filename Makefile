@@ -54,11 +54,11 @@ $(SUBMODULES):.gitmodules-changed
 # poulter theme copied to oh-my-zsh
 all: .oh-my-zsh/themes/poulter.zsh-theme .vim/plugin/autotag.vim
 
-.oh-my-zsh/themes/poulter.zsh-theme: $(SUBMODULES)
+.oh-my-zsh/themes/poulter.zsh-theme: | $(SUBMODULES)
 	cd .oh-my-zsh/themes/; \
 	  ln -s ../../$(notdir $@) .
 
-../bin/git-when-merged: $(SUBMODULES) ../bin
+../bin/git-when-merged: | $(SUBMODULES) ../bin
 	cd ../bin; \
 	  ln -s $(PWD)/git/git-when-merged/bin/git-when-merged .
 
