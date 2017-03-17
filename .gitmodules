@@ -106,3 +106,12 @@
 [submodule "git/git-when-merged"]
 	path = git/git-when-merged
 	url = https://github.com/mhagger/git-when-merged
+[submodule ".vim/bundles/vim-mark"]
+	path = .vim/bundles/vim-mark
+	url = https://github.com/jrosiek/vim-mark
+[submodule ".vim/bundles/vimwiki"]
+	path = .vim/bundles/vimwiki
+	url = https://github.com/vimwiki/vimwiki
+[submodule ".vim/bundles/vim-markdown"]
+	path = .vim/bundles/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown
