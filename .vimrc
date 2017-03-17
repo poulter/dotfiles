@@ -76,7 +76,11 @@ set ruler            " show the cursor position all the time
 
 set vb
 
+
+" folding 
 set foldmethod=syntax
+set foldnestmax=10
+set foldenable
 
 set readonly
 
@@ -130,9 +134,22 @@ augroup filetype
   au! BufRead,BufNewFile *.sv.erb                               let b:eruby_subtype='systemverilog'  |set filetype=eruby
   "au BufRead,BufNewFile *.sv                                    set filetype=systemverilog.doxygen
   au BufNewFile,BufRead *.doxygen                               setfiletype doxygen
+  au BufNewFile,BufReadPost *.md                                set filetype=markdown
 augroup END
 
 :au FileType systemverilog,verilog_systemverilog let b:delimitMate_quotes = "\""
+
+" note taking with markdown
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'ruby', 'systemverilog']
+let g:vim_markdown_folding_disabled = 0
+let g:vim_markdown_folding_level = 10
+let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_override_foldtext = 0
+
+" vimwiki
+command! -nargs=1 Ngrep vimgrep "<args>" ~/vimwiki/*.wiki
+nnoremap <leader>[ :Ngrep 
+autocmd BufReadPre,FileReadPre * if @% == '~/vimwiki/diary/diary.wiki' | call VimwikiDiaryGenerateLinks() | endif
 
 " skeletons
 autocmd BufNewFile  Makefile*   0r ~/.vim/skeleton/skeleton.mk
@@ -167,6 +184,9 @@ filetype plugin on    " Enable filetype-specific plugins
 "                  the indent of a line.  When non-empty this method overrides
 "                  the other ones.  See |indent-expression|.
 set cindent
+
+" turn off syntax and everything else if file is larger than 2G
+let g:LargeFile=2000
 
 au BufReadPost,BufNewFile * if exists("b:current_syntax")
 au BufReadPost,BufNewFile *   if b:current_syntax == "perl"
@@ -208,3 +228,7 @@ function! Removedroppedmarkers()
   %!grep -v '0d: DEBUG MARKER'
 endfunction
 let g:load_doxygen_syntax=1
+
+if filereadable("~/.vimrc.local")
+  source "~/.vimrc.local"
+endif
