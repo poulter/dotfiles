@@ -115,3 +115,6 @@
 [submodule ".vim/bundles/vim-markdown"]
 	path = .vim/bundles/vim-markdown
 	url = https://github.com/plasticboy/vim-markdown
+[submodule ".vim/bundles/calendar-vim"]
+	path = .vim/bundles/calendar-vim
+	url = https://github.com/mattn/calendar-vim
