@@ -6,7 +6,7 @@ set                     pastetoggle=<F2>
 map               <F3> :set list! nolist?<CR>
 map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
-map               <F5> /\*E\\|^UVM_FATAL\\|^UVM_ERROR\\|: ERROR \\|ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed\\|^ *\d*:* *FAIL<CR>
+map               <F5> /\*E\\|UVM_FATAL\\|UVM_ERROR\\|: ERROR \\|ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed\\|^ *\d*:* *FAIL<CR>
 nnoremap <silent> <F7> :Tlist<CR>
 map  <silent>     <F9> :call Dropmarker()<CR>
 map  <silent>   <S-F9> :call Fixdroppedmarkers()<CR>
@@ -14,7 +14,7 @@ map  <silent>   <A-F9> :call Removedroppedmarkers()<CR>
 map  <silent>   <C-F9> :call Removedroppedmarkers()<CR>
 map  <silent> <S-A-F9> :call Removedroppedmarkers()<CR>
 map  <silent> <S-C-F9> :call Removedroppedmarkers()<CR>
-map               <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
+map              <F11> :!perl -c % \|& tee ~/.vim/perlout<CR>:bel split ~/.vim/perlout<CR>:1<CR>^W p<CR>
 map      <silent> t     :TagbarToggle<CR>
 map      <silent> <Leader>cd <Plug>RooterChangeToRootDirectory<CR>:pwd<CR>
 
@@ -130,7 +130,7 @@ augroup filetype
   "au! BufRead,BufNewFile *.v,*.sv,*.vbh,*.stm,*.vbh.aml,*.v_tpl set filetype=verilog_systemverilog
   au! BufRead,BufNewFile *.god,*.pill,Gemfile,*.simeta          set filetype=ruby
   au! BufRead,BufNewFile                      *.simeta.erb      let b:eruby_subtype='ruby'|set filetype=eruby
-  au! BufRead,BufNewFile *.yaml                                 let b:eruby_subtype='yaml'|set filetype=eruby
+  au! BufRead,BufNewFile *.yaml, *.yml                          let b:eruby_subtype='yaml'|set filetype=eruby
   au! BufRead,BufNewFile *.sv.erb                               let b:eruby_subtype='systemverilog'  |set filetype=eruby
   "au BufRead,BufNewFile *.sv                                    set filetype=systemverilog.doxygen
   au BufNewFile,BufRead *.doxygen                               setfiletype doxygen
@@ -149,7 +149,10 @@ let g:vim_markdown_override_foldtext = 0
 " vimwiki
 command! -nargs=1 Ngrep vimgrep "<args>" ~/vimwiki/*.wiki
 nnoremap <leader>[ :Ngrep 
-autocmd BufReadPre,FileReadPre * if @% == '~/vimwiki/diary/diary.wiki' | call VimwikiDiaryGenerateLinks() | endif
+autocmd BufRead,BufNewFile diary.wiki if @% =~ "tpoulter" | execute "VimwikiDiaryGenerateLinks" | endif
+
+" calendar
+let g:calendar_keys = { 'goto_next_month' : 'n', 'goto_prev_month' : 'p', 'goto_next_year'  : 'N',  'goto_prev_year'  : 'P' }
 
 " skeletons
 autocmd BufNewFile  Makefile*   0r ~/.vim/skeleton/skeleton.mk
@@ -230,5 +233,5 @@ endfunction
 let g:load_doxygen_syntax=1
 
 if filereadable("~/.vimrc.local")
-  source "~/.vimrc.local"
+  source ~/.vimrc.local
 endif
