@@ -2,7 +2,7 @@ PWD:= $(shell pwd)
 UPDIR:=$(notdir $(PWD))
 
 # don't make links to these
-IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules poulter.zsh-theme bin git
+IGNORE:= . .. .git Makefile %.swp .gitignore .gitmodules poulter.zsh-theme bin git plugupdate.vim
 
 # ./ is assumed.  what other directories should be processed?
 OTHER_DIRS:= .vim/bundles bin
@@ -67,8 +67,14 @@ all: ../bin/git-when-merged
 # stuff copied to plugin
 all: .vim/plugin/autotag.vim
 .vim/plugin/autotag.vim: Makefile
-	wget https://raw.github.com/craigemery/dotFiles/master/vim/plugin/autotag.vim
-	mv autotag.vim .vim/plugin/autotag.vim 
+	curl -fLo $@ --create-dirs https://raw.github.com/craigemery/dotFiles/master/vim/plugin/autotag.vim
+	touch $@
+
+all: .vim/autoload/plug.vim
+.vim/autoload/plug.vim: Makefile $(wildcard ~/local_plugins.vim)
+	curl -fLo $@ --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	vim -s plug_update.vim # updating vim plugins
+	touch $@
 
 ###############################
 

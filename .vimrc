@@ -8,6 +8,7 @@ map               <F4> :call NumberToggle()<CR>
 "map              <F5> /SIMERROR\\|^FATAL\\|^ERROR\\|Error:\\|^WARN\\|Warning-\\|started at .* failed at <CR>
 map               <F5> /\*E\\|UVM_FATAL\\|UVM_ERROR\\|: ERROR \\|ERROR *:\\|^error *:\\|^Error *:\\|--- Stack trace follows:\\|Error-\\|vcs_sim_exe:.*Assertion.*failed\\|^ *\d*:* *FAIL<CR>
 nnoremap <silent> <F7> :Tlist<CR>
+map  <silent>     <F8> :Tmux <Up><CR>
 map  <silent>     <F9> :call Dropmarker()<CR>
 map  <silent>   <S-F9> :call Fixdroppedmarkers()<CR>
 map  <silent>   <A-F9> :call Removedroppedmarkers()<CR>
@@ -22,12 +23,74 @@ map gD :!chrome "http://www.m-w.com/cgi-bin/dictionary?book=Dictionary&va=<cword
 map gG :!chrome "http://www.google.com/search?q=<cword>"                           >& /dev/null &<CR><CR>
 map gS :!chrome "http://siyobik.info.gf/main/reference/instruction/<cword>"        >& /dev/null &<CR><CR>
 
-runtime! autoload/pathogen.vim
-if exists('g:loaded_pathogen')
-  call pathogen#surround('~/.vim/bundles/{}')
-  call pathogen#infect()
-  call pathogen#helptags()
-end
+" runtime! autoload/pathogen.vim
+" if exists('g:loaded_pathogen')
+"   call pathogen#surround('~/.vim/bundles/{}')
+"   call pathogen#infect()
+"   call pathogen#helptags()
+" end
+
+call plug#begin('~/.vim/plugged')
+
+" Generic Programming
+Plug 'tpope/vim-sleuth'                          " heuristic tab stops
+Plug 'jgdavey/tslime.vim'                        " run builds from vim to tmux
+Plug 'vim-scripts/Align'                         " character alignment
+Plug 'ervandew/supertab'                         " tab for all completions
+Plug 'kien/rainbow_parentheses.vim'              " visually match parens
+Plug 'scrooloose/syntastic'                      " Syntax checking on save
+Plug 'triglav/vim-visual-increment'              " columnar number increment
+
+" snippets
+Plug 'MarcWeber/vim-addon-mw-utils'              " required by snipmate
+Plug 'garbas/vim-snipmate'                       " snippet support
+
+" Data Files
+Plug 'jrosiek/vim-mark'                          " mark searches
+Plug 'vim-scripts/LargeFile'                     " turn stuff off when the file is really big
+
+" Version Control
+Plug 'vim-scripts/vcscommand.vim'                " version control in general
+Plug 'jdthomas/vcsp4'                            " perforce
+
+" Planning and Documentation
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
+
+" SystemVerilog
+Plug 'Spaceghost/vim-matchit'                    " begin...end matching for systemverilog
+Plug 'poulter/vim-SystemVerilog'                 " syntax, snippets, and matchit
+
+" Ruby
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-bundler'
+
+" Markdown
+Plug 'plasticboy/vim-markdown'
+
+if filereadable(glob("~/local_plugins.vim"))
+  so ~/local_plugins.vim
+endif
+
+" url = https://github.com/tomtom/tlib_vim.git
+" url = https://github.com/Lokaltog/vim-easymotion.git
+" url = https://github.com/vim-scripts/YankRing.vim.git
+" url = https://github.com/tpope/vim-pathogen.git
+" url = https://github.com/vim-scripts/closetag.vim.git
+" url = https://github.com/vim-scripts/taglist.vim.git
+" url = https://github.com/vim-scripts/DrawIt.git
+" url = https://github.com/kien/ctrlp.vim.git
+" url = https://github.com/airblade/vim-rooter.git
+" url = https://github.com/vim-scripts/AutoTag.git
+" url = https://github.com/majutsushi/tagbar.git
+" url = https://github.com/scrooloose/nerdtree.git
+" url = https://github.com/tpope/vim-abolish.git
+" url = https://github.com/tpope/vim-endwise.git
+" url = https://github.com/tpope/vim-repeat.git
+" url = https://github.com/scrooloose/nerdcommenter.git
+" url = https://github.com/tpope/vim-surround.git
+" url = https://github.com/mhagger/git-when-merged
+call plug#end()
 
 " set relativenumber
 function! NumberToggle()
@@ -79,6 +142,7 @@ set vb
 
 " folding 
 set foldmethod=syntax
+let g:vimwiki_folding='syntax'
 set foldnestmax=10
 set foldenable
 
@@ -100,8 +164,8 @@ set smartcase
 set nowrapscan
 
 " tabs
-set softtabstop=2
-set shiftwidth=2
+set softtabstop=3
+set shiftwidth=3
 set expandtab
 
 " rainbow parenthesis
@@ -232,6 +296,6 @@ function! Removedroppedmarkers()
 endfunction
 let g:load_doxygen_syntax=1
 
-if filereadable("~/.vimrc.local")
-  source ~/.vimrc.local
+if filereadable(glob("~/.vimrc.local"))
+  so ~/.vimrc.local
 endif
