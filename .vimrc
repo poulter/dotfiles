@@ -31,6 +31,8 @@ map gS :!chrome "http://siyobik.info.gf/main/reference/instruction/<cword>"     
 " end
 
 call plug#begin('~/.vim/plugged')
+let g:plug_shallow=0
+let g:plug_url_format = 'https://github.com/%s.git'
 
 " Generic Programming
 Plug 'tpope/vim-sleuth'                          " heuristic tab stops
